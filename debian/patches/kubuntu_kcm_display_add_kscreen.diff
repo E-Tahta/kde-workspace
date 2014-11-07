@@ -1,0 +1,18 @@
+Description: Kubuntu does not ship the randr kcm by default
+ Kubuntu ships the KScreen KCM by default
+Author: Harald Sitter <apachelogger@ubuntu.com>
+Bug-Ubuntu: https://bugs.launchpad.net/ubuntu/+source/kde-runtime/+bug/1251140
+Forwarded: not-needed
+Index: kde-workspace-4.11.4/kcontrol/hardware/display/display.cpp
+===================================================================
+--- kde-workspace-4.11.4.orig/kcontrol/hardware/display/display.cpp	2013-06-28 19:10:44.135426884 +0200
++++ kde-workspace-4.11.4/kcontrol/hardware/display/display.cpp	2014-01-02 12:30:24.762427129 +0100
+@@ -41,7 +41,7 @@
+ {
+   m_tabs = new QTabWidget( this );
+ 
+-  addTab( "randr", i18n( "Size && Orientation" ) );
++  addTab( "kcm_kscreen", i18n( "Size && Orientation" ) );
+   addTab( "nvidiadisplay", i18n( "Graphics Adaptor" ) );
+   addTab( "nvidia3d", i18n( "3D Options" ) );
+   addTab( "kgamma", i18n( "Monitor Gamma" ) );

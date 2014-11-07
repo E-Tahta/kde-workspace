@@ -1,0 +1,7 @@
+usr/bin/krandrstartup
+usr/bin/krandrtray
+usr/lib/kde4/kcm_randr.so
+usr/lib/kde4/kded_randrmonitor.so
+usr/share/applications/kde4/krandrtray.desktop
+usr/share/kde4/services/kded/randrmonitor.desktop
+usr/share/kde4/services/randr.desktop

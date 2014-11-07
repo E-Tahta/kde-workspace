@@ -1,0 +1,27 @@
+Index: kde-workspace/startkde.cmake
+===================================================================
+--- kde-workspace.orig/startkde.cmake	2014-02-14 11:53:21.926042620 +0100
++++ kde-workspace/startkde.cmake	2014-02-14 11:53:21.922042540 +0100
+@@ -70,12 +70,6 @@
+ kcminputrc Mouse cursorSize ''
+ ksplashrc KSplash Theme Default
+ ksplashrc KSplash Engine KSplashX
+-krandrrc Display ApplyOnStartup false
+-krandrrc Display StartupCommands ''
+-krandrrc [Screen0]
+-krandrrc [Screen1]
+-krandrrc [Screen2]
+-krandrrc [Screen3]
+ kcmfonts General forceFontDPI 0
+ kdeglobals Locale Language '' # trigger requesting languages from KLocale
+ EOF
+@@ -105,7 +99,8 @@
+     fi
+ fi
+ 
+-. krandrstartup
++# disabled due to move to kscreen - jriddell 2013-03
++# . krandrstartup
+ 
+ if test "$kcmfonts_general_forcefontdpi" -ne 0; then
+     xrdb -quiet -merge -nocpp <<EOF

@@ -1,0 +1,23 @@
+.TH KMENUEDIT 1
+.SH NAME
+kmenuedit \- KDE menu editor
+.SH SYNOPSIS
+.B kmenuedit
+.I [Qt-options] [KDE-options] [menu] [menu-id]
+.SH DESCRIPTION
+.B Kmenuedit
+allows editing one of the KDE application launchers: Kickoff, the
+classic K menu or Lancelot Launcher.
+.SH OPTIONS
+.TP
+.B menu
+Sub menu to pre-select.
+.TP
+.B menu-id
+Menu entry to pre-select.
+.so kdeopt.part
+.SH SEE ALSO
+More detailed user documentation is available from
+.BR help:/kmenuedit
+(either enter this URL into \fBkonqueror\fP, or run `khelpcenter
+help:/kmenuedit').

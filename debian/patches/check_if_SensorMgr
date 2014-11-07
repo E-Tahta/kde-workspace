@@ -1,0 +1,18 @@
+Index: kde-workspace/libs/ksysguard/ksgrd/SensorAgent.cpp
+===================================================================
+--- kde-workspace.orig/libs/ksysguard/ksgrd/SensorAgent.cpp	2014-09-21 16:12:31.902565747 +0200
++++ kde-workspace/libs/ksysguard/ksgrd/SensorAgent.cpp	2014-09-21 16:42:38.510595463 +0200
+@@ -109,9 +109,10 @@
+           else {
+             /* We just received the end of an error message, so we
+              * can display it. */
+-            SensorMgr->notify( i18nc( "%1 is a host name", "Message from %1:\n%2",
+-                               mHostName ,
+-                               error ) );
++            if (SensorMgr)
++              SensorMgr->notify( i18nc( "%1 is a host name", "Message from %1:\n%2",
++                                        mHostName ,
++                                        error ) );
+           }
+           found = true;
+ 	  break;

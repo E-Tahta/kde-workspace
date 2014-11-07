@@ -1,0 +1,29 @@
+Index: kde-workspace/kdm/ConfigureChecks.cmake
+===================================================================
+--- kde-workspace.orig/kdm/ConfigureChecks.cmake	2014-03-02 11:19:54.378463363 +0100
++++ kde-workspace/kdm/ConfigureChecks.cmake	2014-03-02 16:24:05.240895816 +0100
+@@ -97,6 +97,7 @@
+ int main()
+ {
+     int fd, fd2;
++    int ret;
+     struct sockaddr_un sa;
+ 
+     if ((fd = socket(PF_UNIX, SOCK_STREAM, 0)) < 0)
+@@ -108,10 +109,14 @@
+         return 2;
+     chmod(sa.sun_path, 0);
+     setuid(getuid() + 1000);
+-    if ((fd2 = socket(PF_UNIX, SOCK_STREAM, 0)) < 0)
++    if ((fd2 = socket(PF_UNIX, SOCK_STREAM, 0)) < 0) {
++        unlink(sa.sun_path);
+         return 2;
++    }
+     connect(fd2, (struct sockaddr *)&sa, sizeof(sa));
+-    return errno != EACCES;
++    ret = errno != EACCES;
++    unlink(sa.sun_path);
++    return ret;
+ }
+ " HONORS_SOCKET_PERMS)
+ macro_pop_required_vars()

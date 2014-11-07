@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<descriptor>
+
+<version>
+    4.11.3
+</version>
+
+<headers>
+    /usr/include/KDE/Plasma/Weather/Ion
+    /usr/include/plasma/weather
+</headers>
+
+<libs>
+    /usr/lib/libweather_ion.so
+</libs>
+
+</descriptor>

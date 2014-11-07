@@ -1,0 +1,28 @@
+.TH KSYSGUARD 1
+.SH NAME
+ksysguard \- KDE System Monitor
+.SH SYNOPSIS
+.B ksysguard
+.I [Qt-options] [KDE-options] [worksheet]
+.SH DESCRIPTION
+.B System Monitor
+is the KDE Task and Performance Monitor.
+
+It features a client/server architecture that allows monitoring of local as
+well as remote hosts. The graphical front end uses so-called sensors to
+retrieve the information it displays. A sensor can return simple values or
+more complex information like tables. For each type of information, one or
+more displays are provided. Displays are organized in worksheets that can be
+saved and loaded independently from each other. So, System Monitor is not only
+a simple task manager but also a very powerful tool to control large server
+farms.
+.SH OPTIONS
+.TP
+.B worksheet
+Optional worksheet files to load.
+.so kdeopt.part
+.SH SEE ALSO
+More detailed user documentation is available from
+.BR help:/ksysguard
+(either enter this URL into \fBkonqueror\fP, or run `khelpcenter
+help:/ksysguard').

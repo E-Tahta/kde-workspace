@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<descriptor>
+
+<version>
+    4.11.3
+</version>
+
+<headers>
+    /usr/include/ksysguard/process.h
+    /usr/include/ksysguard/processes.h
+</headers>
+
+<libs>
+    /usr/lib/libprocesscore.so
+</libs>
+
+</descriptor>

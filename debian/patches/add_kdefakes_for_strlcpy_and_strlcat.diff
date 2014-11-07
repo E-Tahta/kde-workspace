@@ -1,0 +1,71 @@
+commit 38faa3a6208b885873a951303d46dbb5f7f56c5f
+Author: Maximiliano Curia <maxy@debian.org>
+Date:   Mon Jun 17 14:32:43 2013 +0200
+
+    Add kdefakes for strlcpy and strlcat
+
+diff --git a/kcheckpass/checkpass_osfc2passwd.c b/kcheckpass/checkpass_osfc2passwd.c
+index 9a074f9..8fc9aea 100644
+--- a/kcheckpass/checkpass_osfc2passwd.c
++++ b/kcheckpass/checkpass_osfc2passwd.c
+@@ -30,6 +30,8 @@ static int osf1c2_getprpwent(char *p, char *n, int len);
+  * This is the authentication code for OSF C2 security passwords
+  *******************************************************************/
+ 
++#include <kdefakes.h>
++
+ #include <stdio.h>
+ #include <string.h>
+ #include <stdlib.h>
+diff --git a/ksysguard/ksysguardd/FreeBSD/ProcessList.c b/ksysguard/ksysguardd/FreeBSD/ProcessList.c
+index 671bc8c..0fdb20e 100644
+--- a/ksysguard/ksysguardd/FreeBSD/ProcessList.c
++++ b/ksysguard/ksysguardd/FreeBSD/ProcessList.c
+@@ -23,6 +23,8 @@
+ 
+ #include "ProcessList.h"
+ 
++#include <kdefakes.h>
++
+ #include <ctype.h>
+ #include <fcntl.h>
+ #include <paths.h>
+diff --git a/ksysguard/ksysguardd/FreeBSD/diskstat.c b/ksysguard/ksysguardd/FreeBSD/diskstat.c
+index 0feaabf..788ae70 100644
+--- a/ksysguard/ksysguardd/FreeBSD/diskstat.c
++++ b/ksysguard/ksysguardd/FreeBSD/diskstat.c
+@@ -19,6 +19,8 @@
+ 
+ */
+ 
++#include <kdefakes.h>
++
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+diff --git a/ksysguard/ksysguardd/FreeBSD/logfile.c b/ksysguard/ksysguardd/FreeBSD/logfile.c
+index fb2f5cc..de93656 100644
+--- a/ksysguard/ksysguardd/FreeBSD/logfile.c
++++ b/ksysguard/ksysguardd/FreeBSD/logfile.c
+@@ -19,6 +19,8 @@
+ 
+ */
+ 
++#include <kdefakes.h>
++
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+diff --git a/ksysguard/ksysguardd/FreeBSD/netdev.c b/ksysguard/ksysguardd/FreeBSD/netdev.c
+index c158593..3245706 100644
+--- a/ksysguard/ksysguardd/FreeBSD/netdev.c
++++ b/ksysguard/ksysguardd/FreeBSD/netdev.c
+@@ -18,6 +18,8 @@
+ 
+ */
+ 
++#include <kdefakes.h>
++
+ #include <sys/types.h>
+ #include <sys/socket.h>
+ #include <sys/sysctl.h>

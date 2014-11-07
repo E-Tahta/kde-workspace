@@ -1,0 +1,4 @@
+kde-style-oxygen: package-name-doesnt-match-sonames
+# Private libraries, no symbols file needed
+kde-style-oxygen: no-symbols-control-file usr/lib/liboxygenstyle.so.*
+kde-style-oxygen: no-symbols-control-file usr/lib/liboxygenstyleconfig.so.*

@@ -1,0 +1,3 @@
+kde-window-manager: package-name-doesnt-match-sonames
+kde-window-manager: hardening-no-fortify-functions usr/lib/kde4/kcm_kwinrules.so
+kde-window-manager: hardening-no-fortify-functions usr/lib/kde4/libkdeinit/libkdeinit4_kwin_rules_dialog.so

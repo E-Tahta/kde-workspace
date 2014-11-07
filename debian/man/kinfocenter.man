@@ -1,0 +1,20 @@
+.TH KINFOCENTER 1
+.SH NAME
+kinfocenter \- KDE Info Center
+.SH SYNOPSIS
+.B kinfocenter
+.I [Qt-options] [KDE-options]
+.SH DESCRIPTION
+.B KInfoCenter
+provides you with a centralized and convenient overview of your
+system and desktop environment.
+
+The information center is made up of multiple modules. Each module is a
+separate application, but the information center organizes all of these
+programs into a convenient location. 
+.so kdeopt.part
+.SH SEE ALSO
+More detailed user documentation is available from
+.BR help:/kinfocenter
+(either enter this URL into \fBkonqueror\fP, or run `khelpcenter
+help:/kinfocenter').

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<descriptor>
+
+<version>
+    4.11.3
+</version>
+
+<headers>
+    /usr/include/kgreeterplugin.h
+</headers>
+
+<libs>
+    /usr/lib/kde4/kgreet_classic.so
+    /usr/lib/kde4/kgreet_generic.so
+    /usr/lib/kde4/kgreet_winbind.so
+</libs>
+
+</descriptor>

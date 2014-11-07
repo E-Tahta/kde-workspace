@@ -1,0 +1,31 @@
+.TH KSYSGUARDD 1
+.SH NAME
+ksysguardd \- KDE System Monitor Daemon
+.SH SYNOPSIS
+.B ksysguardd
+.I [-d] [-i] [-p port] [-f configfile] [-h]
+.SH DESCRIPTION
+.B Ksysguardd
+is part of the KDE System Monitor (ksysguard) client/server architecture that
+allows monitoring of local as well as remote hosts.
+.SH OPTIONS
+.TP
+.B \-d
+Daemonize.
+.TP
+.B \-i
+Bind to all interfaces.
+.TP
+.B \-p \fIport\fP
+Port number to listen to.
+.TP
+.B \-f \fIconfigfile\fP
+Read configuration from `\fIconfigfile\fP'.
+.TP
+.B \-h
+Show usage.
+.SH SEE ALSO
+More detailed user documentation is available from
+.BR help:/ksysguard
+(either enter this URL into \fBkonqueror\fP, or run `khelpcenter
+help:/ksysguard').

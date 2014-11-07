@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<descriptor>
+
+<version>
+    4.11.3
+</version>
+
+<headers>
+    /usr/include/kscreensaver.h
+    /usr/include/kscreensaver_export.h
+    /usr/include/kscreensaver_vroot.h
+</headers>
+
+<libs>
+    /usr/lib/libkscreensaver.so
+</libs>
+
+</descriptor>

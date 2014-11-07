@@ -1,0 +1,13 @@
+Index: kde-workspace/ksysguard/ksysguardd/Linux/acpi.c
+===================================================================
+--- kde-workspace.orig/ksysguard/ksysguardd/Linux/acpi.c	2014-09-21 16:12:31.822568934 +0200
++++ kde-workspace/ksysguard/ksysguardd/Linux/acpi.c	2014-09-21 16:20:05.548506199 +0200
+@@ -316,7 +316,7 @@
+ static int getSysFileValue(const char *group, int value, const char *file) {
+     static int shownError = 0;
+     char th_file[ ACPIFILENAMELENGTHMAX ];
+-    char input_buf[ 100 ];
++    char input_buf[ 100 ] = { 0 };
+     snprintf(th_file, sizeof(th_file), "/sys/class/thermal/%s%d/%s",group, value, file);
+     int fd = open(th_file, O_RDONLY);
+     if (fd < 0) {

@@ -1,0 +1,17 @@
+Index: kde-workspace/kwin/effects/CMakeLists.txt
+===================================================================
+--- kde-workspace.orig/kwin/effects/CMakeLists.txt	2014-03-02 12:22:26.668618087 +0100
++++ kde-workspace/kwin/effects/CMakeLists.txt	2014-03-02 12:25:54.645548953 +0100
+@@ -57,7 +57,11 @@
+ 
+ 
+     if(OPENGLES_FOUND)
+-        KWIN4_ADD_EFFECT_BACKEND(kwin4_effect_gles_${name} ${ARGN})
++        kde4_add_plugin(kwin4_effect_gles_${name} ${ARGN})
++        target_link_libraries(kwin4_effect_gles_${name}
++            kwineffects kwinglesutils
++            ${kwin_effect_KDE_LIBS} ${kwin_effect_QT_LIBS}
++            ${kwin_effect_XLIB_LIBS} ${kwin_effect_XCB_LIBS})
+         # OpenGL ES gets into a different library
+         set_target_properties(kwin4_effect_gles_${name} PROPERTIES COMPILE_FLAGS "-DKWIN_HAVE_OPENGLES")
+         set_target_properties(kwin4_effect_gles_${name} PROPERTIES OUTPUT_NAME ${KWIN_NAME}4_effect_gles_${name})

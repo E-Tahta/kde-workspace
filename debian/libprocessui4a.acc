@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<descriptor>
+
+<version>
+    4.11.3
+</version>
+
+<headers>
+    /usr/include/ksysguard/ProcessModel.h
+    /usr/include/ksysguard/ProcessFilter.h
+    /usr/include/ksysguard/KTextEditVT.h
+    /usr/include/ksysguard/ksysguardprocesslist.h
+</headers>
+
+<libs>
+    /usr/lib/libprocessui.so
+</libs>
+
+</descriptor>

@@ -1,0 +1,4 @@
+plasma-desktop: package-name-doesnt-match-sonames libkickoff
+plasma-desktop: shlib-without-versioned-soname usr/lib/libkickoff.so libkickoff.so
+plasma-desktop: postinst-must-call-ldconfig usr/lib/libkickoff.so
+plasma-desktop: hardening-no-fortify-functions usr/lib/kde4/plasma_applet_launcher.so

@@ -1,0 +1,8 @@
+kde-workspace-bin: package-name-doesnt-match-sonames
+kde-workspace-bin: hardening-no-fortify-functions usr/bin/kstartupconfig4
+kde-workspace-bin: hardening-no-fortify-functions usr/lib/kde4/kio_fonts.so
+kde-workspace-bin: hardening-no-fortify-functions usr/lib/kde4/libexec/fontinst
+kde-workspace-bin: hardening-no-fortify-functions usr/lib/kde4/libexec/fontinst_helper
+kde-workspace-bin: hardening-no-fortify-functions usr/lib/kde4/libkdeinit/libkdeinit4_kcminit.so
+kde-workspace-bin: hardening-no-fortify-functions usr/lib/kde4/libkdeinit/libkdeinit4_kcminit_startup.so
+kde-workspace-bin: hardening-no-fortify-functions usr/lib/strigi/strigita_font.so

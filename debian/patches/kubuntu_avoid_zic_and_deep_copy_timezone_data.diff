@@ -1,0 +1,34 @@
+Description: Avoid using zic on Debian systems
+ It does not use zic when available as zic is broken. Also adds symlink
+ handling, when a tz file is a symlink, it gets the link target and
+ copies that instead. This prevents broken symlinks.
+Forwarded: not-needed
+Author: Harald Sitter <apachelogger@kubuntu.org>
+Bug-Ubuntu: https://bugs.launchpad.net/ubuntu/+source/kde-workspace/+bug/1206199
+Last-Update: 2013-09-26
+Index: kde-workspace-4.11.1/kcontrol/dateandtime/helper.cpp
+===================================================================
+--- kde-workspace-4.11.1.orig/kcontrol/dateandtime/helper.cpp	2013-09-26 15:37:48.767903170 +0200
++++ kde-workspace-4.11.1/kcontrol/dateandtime/helper.cpp	2013-09-26 15:47:28.471903101 +0200
+@@ -177,11 +177,20 @@
+ #else
+         QString tz = "/usr/share/zoneinfo/" + selectedzone;
+ 
+-        QString zic = KStandardDirs::findExe("zic", exePath);
++        // Never check for zic as currently it is defunct on Debian systems.
++        // LP: #1212662
++        QString zic;
+         if (!zic.isEmpty()) {
+             KProcess::execute(zic, QStringList() << "-l" << selectedzone);
+         } else if (!QFile::remove("/etc/localtime")) {
+           ret |= TimezoneError;
++        } else if (!QFile::symLinkTarget(tz).isEmpty()) {
++          // If the timezone file is a symlink, get its link target and copy
++          // that instead as otherwise the symlink may end up being broken.
++          // LP: #1206199
++          if (!QFile::copy(QFile::symLinkTarget(tz), "/etc/localtime")) {
++            ret |= TimezoneError;
++          }
+         } else if (!QFile::copy(tz, "/etc/localtime")) {
+           ret |= TimezoneError;
+         }

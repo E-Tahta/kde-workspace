@@ -1,0 +1,4 @@
+debian/local/kdm.options.5
+debian/man/genkdmconf.1
+debian/man/kdm.1
+debian/man/kdmctl.1
