@@ -92,8 +92,7 @@ Depends: freespacenotifier (>= ${source:Version}),
          ksysguard (>= ${source:Version}),
          systemsettings (>= ${source:Version}),
          ${misc:Depends}
-Recommends: kdm (>= ${source:Version}),
-            kinfocenter (>= ${source:Version}),
+Recommends: kinfocenter (>= ${source:Version}),
             kmenuedit (>= ${source:Version})
 Breaks: kdebase-workspace (<< 4:4.7.2)
 Replaces: kdebase-workspace (<< 4:4.7.2)
