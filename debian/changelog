@@ -1,3 +1,9 @@
+kde-workspace (4:4.11.13-3pardus1) unstable; urgency=medium
+
+  * Remove kdm from recommends section
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Mon, 16 Oct 2017 17:06:50 +0300
+
 kde-workspace (4:4.11.13-2) unstable; urgency=medium
 
   * New patch: upstream_do_not_pass_ntpUtility_as_an_argument.patch fix
