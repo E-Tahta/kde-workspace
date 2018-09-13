@@ -1,3 +1,9 @@
+kde-workspace (4:4.11.13-3pardus2) unstable; urgency=medium
+
+  * Pardus CI integration
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Thu, 13 Sep 2018 14:14:00 +0300
+
 kde-workspace (4:4.11.13-3pardus1) unstable; urgency=medium
 
   * Remove kdm from recommends section
