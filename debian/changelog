@@ -1,3 +1,10 @@
+kde-workspace (4:4.11.13-3pardus3) unstable; urgency=medium
+
+  * remove notificaiton plasmoid from install script
+  * Add patches
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Thu, 11 Oct 2018 14:38:12 +0300
+
 kde-workspace (4:4.11.13-3pardus2) unstable; urgency=medium
 
   * Pardus CI integration
