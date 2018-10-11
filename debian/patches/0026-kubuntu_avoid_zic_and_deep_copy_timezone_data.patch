@@ -1,16 +1,17 @@
-Description: Avoid using zic on Debian systems
- It does not use zic when available as zic is broken. Also adds symlink
- handling, when a tz file is a symlink, it gets the link target and
- copies that instead. This prevents broken symlinks.
-Forwarded: not-needed
-Author: Harald Sitter <apachelogger@kubuntu.org>
-Bug-Ubuntu: https://bugs.launchpad.net/ubuntu/+source/kde-workspace/+bug/1206199
-Last-Update: 2013-09-26
-Index: kde-workspace-4.11.1/kcontrol/dateandtime/helper.cpp
+From: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Date: Thu, 11 Oct 2018 14:24:18 +0300
+Subject: kubuntu_avoid_zic_and_deep_copy_timezone_data
+
 ===================================================================
---- kde-workspace-4.11.1.orig/kcontrol/dateandtime/helper.cpp	2013-09-26 15:37:48.767903170 +0200
-+++ kde-workspace-4.11.1/kcontrol/dateandtime/helper.cpp	2013-09-26 15:47:28.471903101 +0200
-@@ -177,11 +177,20 @@
+---
+ kcontrol/dateandtime/helper.cpp | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
+
+diff --git a/kcontrol/dateandtime/helper.cpp b/kcontrol/dateandtime/helper.cpp
+index 5f6f35a..01fd73f 100644
+--- a/kcontrol/dateandtime/helper.cpp
++++ b/kcontrol/dateandtime/helper.cpp
+@@ -177,11 +177,20 @@ int ClockHelper::tz( const QString& selectedzone )
  #else
          QString tz = "/usr/share/zoneinfo/" + selectedzone;
  

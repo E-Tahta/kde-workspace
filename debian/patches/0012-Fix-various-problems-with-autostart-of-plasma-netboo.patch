@@ -1,17 +1,24 @@
 From: Modestas Vainius <modax@debian.org>
+Date: Thu, 11 Oct 2018 14:24:17 +0300
 Subject: Fix various problems with autostart of plasma-netbook
-Bug-Debian: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=584905
-Last-Update: 2011-03-06
 
 This patch should fully fix problems with startup of plasma-netbook when
 plasma-desktop is NOT installed. We aim to support "plasma-desktop"-less
 installation via kde-plasma-netbook metapackage hence this bug was a
 showstopper for this goal.
-Index: kde-workspace/kcontrol/workspaceoptions/workspaceoptions.cpp
-===================================================================
---- kde-workspace.orig/kcontrol/workspaceoptions/workspaceoptions.cpp	2013-09-27 09:19:35.568440190 +0000
-+++ kde-workspace/kcontrol/workspaceoptions/workspaceoptions.cpp	2013-09-27 09:19:35.560440504 +0000
-@@ -92,7 +92,7 @@
+---
+ kcontrol/workspaceoptions/workspaceoptions.cpp |  2 +-
+ plasma/netbook/shell/main.cpp                  | 15 ++++++++-
+ plasma/netbook/shell/plasmaapp.cpp             | 43 +++++++++++++++++++++++++-
+ plasma/netbook/shell/plasmaapp.h               |  8 +++++
+ startkde.cmake                                 | 18 +++++++++++
+ 5 files changed, 83 insertions(+), 3 deletions(-)
+
+diff --git a/kcontrol/workspaceoptions/workspaceoptions.cpp b/kcontrol/workspaceoptions/workspaceoptions.cpp
+index 7fe0dd8..ba82962 100644
+--- a/kcontrol/workspaceoptions/workspaceoptions.cpp
++++ b/kcontrol/workspaceoptions/workspaceoptions.cpp
+@@ -92,7 +92,7 @@ void WorkspaceOptionsModule::save()
  
      m_plasmaNetbookAutostart.setAutostarts(!isDesktop);
      m_plasmaNetbookAutostart.setStartPhase(KAutostart::BaseDesktop);
@@ -20,11 +27,11 @@ Index: kde-workspace/kcontrol/workspaceoptions/workspaceoptions.cpp
      m_plasmaNetbookAutostart.setAllowedEnvironments(QStringList()<<"KDE");
  
      m_krunnerAutostart.setAutostarts(isDesktop);
-Index: kde-workspace/plasma/netbook/shell/main.cpp
-===================================================================
---- kde-workspace.orig/plasma/netbook/shell/main.cpp	2013-09-27 09:19:35.568440190 +0000
-+++ kde-workspace/plasma/netbook/shell/main.cpp	2013-09-27 09:19:35.560440504 +0000
-@@ -40,10 +40,16 @@
+diff --git a/plasma/netbook/shell/main.cpp b/plasma/netbook/shell/main.cpp
+index 3aa7c98..70bcdd9 100644
+--- a/plasma/netbook/shell/main.cpp
++++ b/plasma/netbook/shell/main.cpp
+@@ -40,10 +40,16 @@ KDE_EXPORT int kdemain(int argc, char **argv)
  
  
      bool customGraphicsSystem = false;
@@ -42,7 +49,7 @@ Index: kde-workspace/plasma/netbook/shell/main.cpp
          }
      }
  
-@@ -58,9 +64,16 @@
+@@ -58,9 +64,16 @@ KDE_EXPORT int kdemain(int argc, char **argv)
      options.add("nodesktop", ki18n("Starts as a normal application instead of as the primary user interface"));
      options.add("opengl", ki18n("Use OpenGL to draw the main screen"));
      options.add("screen <geometry>", ki18n("The geometry of the screen"), "800x480");
@@ -59,10 +66,10 @@ Index: kde-workspace/plasma/netbook/shell/main.cpp
      QApplication::setWindowIcon(KIcon("plasma"));
      app->disableSessionManagement(); // autostarted
      int rc = app->exec();
-Index: kde-workspace/plasma/netbook/shell/plasmaapp.cpp
-===================================================================
---- kde-workspace.orig/plasma/netbook/shell/plasmaapp.cpp	2013-09-27 09:19:35.568440190 +0000
-+++ kde-workspace/plasma/netbook/shell/plasmaapp.cpp	2013-09-27 09:19:35.560440504 +0000
+diff --git a/plasma/netbook/shell/plasmaapp.cpp b/plasma/netbook/shell/plasmaapp.cpp
+index c364238..579cf5f 100644
+--- a/plasma/netbook/shell/plasmaapp.cpp
++++ b/plasma/netbook/shell/plasmaapp.cpp
 @@ -33,6 +33,7 @@
  #include <KStandardAction>
  #include <KWindowSystem>
@@ -71,7 +78,7 @@ Index: kde-workspace/plasma/netbook/shell/plasmaapp.cpp
  
  #include <ksmserver_interface.h>
  
-@@ -320,7 +321,8 @@
+@@ -320,7 +321,8 @@ PlasmaApp::PlasmaApp()
        m_autoHideControlBar(true),
        m_unHideTimer(0),
        m_shadowWindow(0),
@@ -81,7 +88,7 @@ Index: kde-workspace/plasma/netbook/shell/plasmaapp.cpp
  {
      PlasmaApp::suspendStartup(true);
      KGlobal::locale()->insertCatalog("libplasma");
-@@ -328,6 +330,13 @@
+@@ -328,6 +330,13 @@ PlasmaApp::PlasmaApp()
  
  
      KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
@@ -95,7 +102,7 @@ Index: kde-workspace/plasma/netbook/shell/plasmaapp.cpp
      bool isDesktop = args->isSet("desktop");
      if (isDesktop) {
          KCrash::setFlags(KCrash::AutoRestart);
-@@ -397,6 +406,38 @@
+@@ -397,6 +406,38 @@ PlasmaApp::~PlasmaApp()
  {
  }
  
@@ -134,11 +141,11 @@ Index: kde-workspace/plasma/netbook/shell/plasmaapp.cpp
  void PlasmaApp::cleanup()
  {
      if (m_corona) {
-Index: kde-workspace/plasma/netbook/shell/plasmaapp.h
-===================================================================
---- kde-workspace.orig/plasma/netbook/shell/plasmaapp.h	2013-09-27 09:19:35.568440190 +0000
-+++ kde-workspace/plasma/netbook/shell/plasmaapp.h	2013-09-27 09:19:35.560440504 +0000
-@@ -87,6 +87,12 @@
+diff --git a/plasma/netbook/shell/plasmaapp.h b/plasma/netbook/shell/plasmaapp.h
+index 8374e53..fad5793 100644
+--- a/plasma/netbook/shell/plasmaapp.h
++++ b/plasma/netbook/shell/plasmaapp.h
+@@ -87,6 +87,12 @@ public:
       */
      bool isDesktop() const;
  
@@ -151,7 +158,7 @@ Index: kde-workspace/plasma/netbook/shell/plasmaapp.h
      void showWidgetExplorer(Plasma::Containment *containment);
  
  public Q_SLOTS:
-@@ -105,6 +111,7 @@
+@@ -105,6 +111,7 @@ private:
      void reserveStruts();
      void createUnhideTrigger();
      void destroyUnHideTrigger();
@@ -159,7 +166,7 @@ Index: kde-workspace/plasma/netbook/shell/plasmaapp.h
  
  private Q_SLOTS:
      void cleanup();
-@@ -152,6 +159,7 @@
+@@ -152,6 +159,7 @@ private:
      QTimer *m_unHideTimer;
      ShadowWindow *m_shadowWindow;
      int m_startupSuspendWaitCount;
@@ -167,11 +174,11 @@ Index: kde-workspace/plasma/netbook/shell/plasmaapp.h
  };
  
  #endif // multiple inclusion guard
-Index: kde-workspace/startkde.cmake
-===================================================================
---- kde-workspace.orig/startkde.cmake	2013-09-27 09:19:35.568440190 +0000
-+++ kde-workspace/startkde.cmake	2013-09-27 09:19:35.564440346 +0000
-@@ -282,6 +282,24 @@
+diff --git a/startkde.cmake b/startkde.cmake
+index afc2cfb..9b832a7 100644
+--- a/startkde.cmake
++++ b/startkde.cmake
+@@ -282,6 +282,24 @@ else
      exit 1
  fi
  

@@ -1,0 +1,24 @@
+From: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Date: Thu, 11 Oct 2018 14:24:17 +0300
+Subject: qguiplatformplugin_kde_NULL_check
+
+===================================================================
+---
+ qguiplatformplugin_kde/qguiplatformplugin_kde.cpp | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/qguiplatformplugin_kde/qguiplatformplugin_kde.cpp b/qguiplatformplugin_kde/qguiplatformplugin_kde.cpp
+index 4f67cc5..dedd7ae 100644
+--- a/qguiplatformplugin_kde/qguiplatformplugin_kde.cpp
++++ b/qguiplatformplugin_kde/qguiplatformplugin_kde.cpp
+@@ -249,7 +249,9 @@ public: // File Dialog integration
+             kdefd->setConfirmOverwrite(qfd->confirmOverwrite());
+             kdefd->setSelection(qfd->selectedFiles().value(0));
+         }
+-        kdefd->setVisible(visible);
++        if (kdefd) {
++            kdefd->setVisible(visible);
++        }
+         return true;
+     }
+     virtual QDialog::DialogCode fileDialogResultCode(QFileDialog *qfd)

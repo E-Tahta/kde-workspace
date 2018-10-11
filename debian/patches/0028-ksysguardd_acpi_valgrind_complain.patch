@@ -1,0 +1,22 @@
+From: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Date: Thu, 11 Oct 2018 14:24:18 +0300
+Subject: ksysguardd_acpi_valgrind_complain
+
+===================================================================
+---
+ ksysguard/ksysguardd/Linux/acpi.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ksysguard/ksysguardd/Linux/acpi.c b/ksysguard/ksysguardd/Linux/acpi.c
+index acf54e1..820ebfd 100644
+--- a/ksysguard/ksysguardd/Linux/acpi.c
++++ b/ksysguard/ksysguardd/Linux/acpi.c
+@@ -316,7 +316,7 @@ void initAcpiThermal(struct SensorModul *sm)
+ static int getSysFileValue(const char *group, int value, const char *file) {
+     static int shownError = 0;
+     char th_file[ ACPIFILENAMELENGTHMAX ];
+-    char input_buf[ 100 ];
++    char input_buf[ 100 ] = { 0 };
+     snprintf(th_file, sizeof(th_file), "/sys/class/thermal/%s%d/%s",group, value, file);
+     int fd = open(th_file, O_RDONLY);
+     if (fd < 0) {

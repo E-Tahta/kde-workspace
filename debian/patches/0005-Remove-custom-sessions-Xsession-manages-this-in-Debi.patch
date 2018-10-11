@@ -1,7 +1,13 @@
 From: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Date: Thu, 11 Oct 2018 14:24:17 +0300
 Subject: Remove custom sessions, Xsession manages this in Debian
-Forwarded: not-needed
-Last-Update: 2011-03-29
+
+---
+ kdm/kfrontend/kgreeter.cpp | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/kdm/kfrontend/kgreeter.cpp b/kdm/kfrontend/kgreeter.cpp
+index 1bddab5..2566c87 100644
 --- a/kdm/kfrontend/kgreeter.cpp
 +++ b/kdm/kfrontend/kgreeter.cpp
 @@ -451,7 +451,6 @@ void

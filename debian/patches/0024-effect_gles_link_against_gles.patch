@@ -1,8 +1,17 @@
-Index: kde-workspace/kwin/effects/CMakeLists.txt
+From: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Date: Thu, 11 Oct 2018 14:24:18 +0300
+Subject: effect_gles_link_against_gles
+
 ===================================================================
---- kde-workspace.orig/kwin/effects/CMakeLists.txt	2014-03-02 12:22:26.668618087 +0100
-+++ kde-workspace/kwin/effects/CMakeLists.txt	2014-03-02 12:25:54.645548953 +0100
-@@ -57,7 +57,11 @@
+---
+ kwin/effects/CMakeLists.txt | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/kwin/effects/CMakeLists.txt b/kwin/effects/CMakeLists.txt
+index bad09f6..37b5da6 100644
+--- a/kwin/effects/CMakeLists.txt
++++ b/kwin/effects/CMakeLists.txt
+@@ -57,7 +57,11 @@ macro( KWIN4_ADD_EFFECT name )
  
  
      if(OPENGLES_FOUND)

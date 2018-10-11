@@ -1,7 +1,13 @@
 From: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Date: Thu, 11 Oct 2018 14:24:17 +0300
 Subject: Debian specific configurations and expected behaviour
-Forwarded: not-needed
-Last-Update: 2012-06-05
+
+---
+ kdm/kfrontend/genkdmconf.c | 80 ++++++++++------------------------------------
+ 1 file changed, 16 insertions(+), 64 deletions(-)
+
+diff --git a/kdm/kfrontend/genkdmconf.c b/kdm/kfrontend/genkdmconf.c
+index f6ff3d2..d10d8c1 100644
 --- a/kdm/kfrontend/genkdmconf.c
 +++ b/kdm/kfrontend/genkdmconf.c
 @@ -622,7 +622,7 @@ static const char def_xaccess[] =

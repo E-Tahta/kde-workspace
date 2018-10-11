@@ -1,12 +1,17 @@
 From: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Date: Thu, 11 Oct 2018 14:24:16 +0300
 Subject: Comment out error message
-Forwarded: not-needed
-Last-Update: 2012-06-05
-Index: kde-workspace/kdm/kfrontend/genkdmconf.c
+
 ===================================================================
---- kde-workspace.orig/kdm/kfrontend/genkdmconf.c	2013-09-27 09:16:47.891007661 +0000
-+++ kde-workspace/kdm/kfrontend/genkdmconf.c	2013-09-27 09:16:47.887007817 +0000
-@@ -3153,9 +3153,11 @@
+---
+ kdm/kfrontend/genkdmconf.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/kdm/kfrontend/genkdmconf.c b/kdm/kfrontend/genkdmconf.c
+index 66e516e..f6ff3d2 100644
+--- a/kdm/kfrontend/genkdmconf.c
++++ b/kdm/kfrontend/genkdmconf.c
+@@ -3153,9 +3153,11 @@ int main(int argc, char **argv)
                  memcmp(oldkde + olen - sizeof(SHR_CONF) + 1,
                         SHR_CONF, sizeof(SHR_CONF)))
              {

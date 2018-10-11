@@ -1,0 +1,36 @@
+From: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Date: Thu, 11 Oct 2018 14:24:18 +0300
+Subject: nlist_ftbfs_krefreebsd
+
+===================================================================
+---
+ ksysguard/ksysguardd/FreeBSD/CMakeLists.txt | 2 ++
+ ksysguard/ksysguardd/FreeBSD/nlist.h        | 4 ++++
+ 2 files changed, 6 insertions(+)
+ create mode 100644 ksysguard/ksysguardd/FreeBSD/nlist.h
+
+diff --git a/ksysguard/ksysguardd/FreeBSD/CMakeLists.txt b/ksysguard/ksysguardd/FreeBSD/CMakeLists.txt
+index c68fb9f..24883a2 100644
+--- a/ksysguard/ksysguardd/FreeBSD/CMakeLists.txt
++++ b/ksysguard/ksysguardd/FreeBSD/CMakeLists.txt
+@@ -1,4 +1,5 @@
+ INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR}/../CContLib ${CMAKE_CURRENT_SOURCE_DIR}/../ )
++include_directories( ${CMAKE_CURRENT_SOURCE_DIR} )
+ 
+ ADD_LIBRARY(libksysguardd STATIC
+             acpi.c
+@@ -12,3 +13,4 @@ ADD_LIBRARY(libksysguardd STATIC
+             ProcessList.c
+             stat.c
+             uptime.c)
++
+diff --git a/ksysguard/ksysguardd/FreeBSD/nlist.h b/ksysguard/ksysguardd/FreeBSD/nlist.h
+new file mode 100644
+index 0000000..ee5c124
+--- /dev/null
++++ b/ksysguard/ksysguardd/FreeBSD/nlist.h
+@@ -0,0 +1,4 @@
++#ifndef KDE_W_NLIST_H_HACK
++#define KDE_W_NLIST_H_HACK
++#include <bsd/nlist.h>
++#endif

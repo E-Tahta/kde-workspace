@@ -1,3 +1,7 @@
+From: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Date: Thu, 11 Oct 2018 14:24:19 +0300
+Subject: upstream_validate_timezone_name_before_setting
+
 commit 54d0bfb5effff9c8cf60da890b7728cbe36a454e
 Author: David Edmundson <kde@davidedmundson.co.uk>
 Date:   Tue Nov 4 14:00:54 2014 +0100
@@ -7,9 +11,12 @@ Date:   Tue Nov 4 14:00:54 2014 +0100
     This patch ensures that the symlink /etc/localtime always points to a
     file in /usr/share/timezones and not an arbitrary file in a user's home
     directory.
+---
+ kcontrol/dateandtime/helper.cpp | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
 diff --git a/kcontrol/dateandtime/helper.cpp b/kcontrol/dateandtime/helper.cpp
-index 101d8ca..21fc51a 100644
+index e77685f..860d755 100644
 --- a/kcontrol/dateandtime/helper.cpp
 +++ b/kcontrol/dateandtime/helper.cpp
 @@ -123,6 +123,13 @@ int ClockHelper::date( const QString& newdate, const QString& olddate )

@@ -1,8 +1,7 @@
 From: Modestas Vainius <modax@debian.org>
-Subject: implement VT switching and status detection support in KDM on kFreeBSD
-Forwarded: no
-Bug-Debian: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=586540
-Last-Update: 2011-08-11
+Date: Thu, 11 Oct 2018 14:24:18 +0300
+Subject: implement VT switching and status detection support in KDM on
+ kFreeBSD
 
 This patch implements proper VT switching for KDM on kFreeBSD. It also includes
 detection of the next available VT which should prevent KDM from taking over
@@ -10,11 +9,36 @@ vt2 on bootup and locking up keyboard/mouse input.
 
 This revision of the patch is pretty hackish. What is more, it does not cover
 FreeBSD (only kFreeBSD) while it could perfectly do so.
-Index: kde-workspace/kdm/backend/dm.c
-===================================================================
---- kde-workspace.orig/kdm/backend/dm.c	2014-05-07 20:21:11.614072291 +0200
-+++ kde-workspace/kdm/backend/dm.c	2014-05-07 20:21:11.610072455 +0200
-@@ -47,7 +47,13 @@
+---
+ kdm/backend/client.c       |  4 ++++
+ kdm/backend/dm.c           | 54 +++++++++++++++++++++++++++++++++++++++++-----
+ kdm/backend/greet.h        |  2 +-
+ kdm/backend/util.c         | 46 ++++++++++++++++++++++++++++++++++++++-
+ kdm/config.def             |  2 +-
+ kdm/kfrontend/genkdmconf.c | 12 ++++++++---
+ 6 files changed, 109 insertions(+), 11 deletions(-)
+
+diff --git a/kdm/backend/client.c b/kdm/backend/client.c
+index a2d06c2..6e7ff9f 100644
+--- a/kdm/backend/client.c
++++ b/kdm/backend/client.c
+@@ -1352,7 +1352,11 @@ startClient(volatile int *pid)
+     
+ # ifdef HAVE_VTS
+     if (td->serverVT > 0)
++# if defined(__linux__)
+         sprintf(ckDeviceBuf, "/dev/tty%d", td->serverVT);
++# elif defined(__FreeBSD_kernel__)
++        sprintf(ckDeviceBuf, "/dev/ttyv%x", td->serverVT);
++# endif
+ # endif
+     isLocal = ((td->displayType & d_location) == dLocal);
+ # ifdef XDMCP
+diff --git a/kdm/backend/dm.c b/kdm/backend/dm.c
+index 4b4cfaf..e6f7f71 100644
+--- a/kdm/backend/dm.c
++++ b/kdm/backend/dm.c
+@@ -47,7 +47,13 @@ from the copyright holder.
  
  #ifdef HAVE_VTS
  # include <sys/ioctl.h>
@@ -28,7 +52,7 @@ Index: kde-workspace/kdm/backend/dm.c
  #endif
  
  static void sigHandler(int n);
-@@ -357,7 +363,12 @@
+@@ -357,7 +363,12 @@ updateNow(void)
  int
  TTYtoVT(const char *tty)
  {
@@ -42,7 +66,7 @@ Index: kde-workspace/kdm/backend/dm.c
  }
  
  int
-@@ -1062,9 +1073,15 @@
+@@ -1062,9 +1073,15 @@ reapChildren(void)
                      } else {
                          int con = open("/dev/console", O_RDONLY);
                          if (con >= 0) {
@@ -59,7 +83,7 @@ Index: kde-workspace/kdm/backend/dm.c
                                  int vt = 1;
                                  struct display *di;
                                  for (di = displays; di; di = di->next)
-@@ -1077,7 +1094,9 @@
+@@ -1077,7 +1094,9 @@ reapChildren(void)
                                          vt = di->serverVT;
                                  ioctl(con, VT_ACTIVATE, vt);
                              }
@@ -69,7 +93,7 @@ Index: kde-workspace/kdm/backend/dm.c
                              close(con);
                          }
                      }
-@@ -1350,16 +1369,41 @@
+@@ -1350,16 +1369,41 @@ static int activeVTs;
  static int
  getBusyVTs(void)
  {
@@ -114,11 +138,11 @@ Index: kde-workspace/kdm/backend/dm.c
      }
      return activeVTs;
  }
-Index: kde-workspace/kdm/backend/greet.h
-===================================================================
---- kde-workspace.orig/kdm/backend/greet.h	2014-05-07 20:21:11.614072291 +0200
-+++ kde-workspace/kdm/backend/greet.h	2014-05-07 20:21:11.610072455 +0200
-@@ -53,7 +53,7 @@
+diff --git a/kdm/backend/greet.h b/kdm/backend/greet.h
+index 2ef7026..3ee04d1 100644
+--- a/kdm/backend/greet.h
++++ b/kdm/backend/greet.h
+@@ -53,7 +53,7 @@ from the copyright holder.
  # define USE_SYSLOG
  #endif
  
@@ -127,84 +151,11 @@ Index: kde-workspace/kdm/backend/greet.h
  /* This needs to be run-time configurable, additionally. */
  # define HAVE_VTS
  #endif
-Index: kde-workspace/kdm/backend/client.c
-===================================================================
---- kde-workspace.orig/kdm/backend/client.c	2014-05-07 20:21:11.614072291 +0200
-+++ kde-workspace/kdm/backend/client.c	2014-05-07 20:21:11.610072455 +0200
-@@ -1352,7 +1352,11 @@
-     
- # ifdef HAVE_VTS
-     if (td->serverVT > 0)
-+# if defined(__linux__)
-         sprintf(ckDeviceBuf, "/dev/tty%d", td->serverVT);
-+# elif defined(__FreeBSD_kernel__)
-+        sprintf(ckDeviceBuf, "/dev/ttyv%x", td->serverVT);
-+# endif
- # endif
-     isLocal = ((td->displayType & d_location) == dLocal);
- # ifdef XDMCP
-Index: kde-workspace/kdm/kfrontend/genkdmconf.c
-===================================================================
---- kde-workspace.orig/kdm/kfrontend/genkdmconf.c	2014-05-07 20:21:11.614072291 +0200
-+++ kde-workspace/kdm/kfrontend/genkdmconf.c	2014-05-07 20:21:11.610072455 +0200
-@@ -1547,7 +1547,8 @@
- upd_servervts(Entry *ce, Section *cs ATTR_UNUSED)
- {
-     if (!ce->active) { /* there is only the Global one */
--#ifdef __linux__ /* XXX actually, sysvinit */
-+/* XXX actually, sysvinit */
-+#if defined(__linux__) || defined(__FreeBSD_kernel__)
-         getInitTab();
-         ASPrintf((char **)&ce->value, "-%d", maxTTY + 1);
-         ce->active = ce->written = True;
-@@ -1559,14 +1560,19 @@
- upd_consolettys(Entry *ce, Section *cs ATTR_UNUSED)
- {
-     if (!ce->active) { /* there is only the Global one */
--#ifdef __linux__ /* XXX actually, sysvinit */
-+/* XXX actually, sysvinit */
-+#if defined(__linux__) || defined(__FreeBSD_kernel__)
-         char *buf;
-         int i;
- 
-         getInitTab();
-         for (i = 0, buf = 0; i < 16; i++)
-             if (TTYmask & (1 << i))
-+#if defined(__linux__)
-                 strCat(&buf, ",tty%d", i + 1);
-+#elif defined(__FreeBSD_kernel__)
-+                strCat(&buf, ",ttyv%x", i);
-+#endif
-         if (buf) {
-             ce->value = buf + 1;
-             ce->active = ce->written = True;
-@@ -3198,7 +3204,7 @@
-             }
-         }
-     }
--#ifdef __linux__
-+#if defined(__linux__) || defined(__FreeBSD_kernel__)
-     if (!stat("/etc/debian_version", &st)) { /* debian */
-         defminuid = "1000";
-         defmaxuid = "29999";
-Index: kde-workspace/kdm/config.def
-===================================================================
---- kde-workspace.orig/kdm/config.def	2014-05-07 20:21:11.614072291 +0200
-+++ kde-workspace/kdm/config.def	2014-05-07 20:21:11.610072455 +0200
-@@ -873,7 +873,7 @@
-  This option is for operating systems (<acronym>OS</acronym>s) with support
-  for virtual terminals (<acronym>VT</acronym>s), by both &kdm; and the
-  <acronym>OS</acronym>s itself.
-- Currently this applies only to Linux.
-+ Currently this applies only to Linux and kFreeBSD.
-  </para><para>
-  When &kdm; switches to console mode, it starts monitoring all
-  <acronym>TTY</acronym> lines listed here (without the leading
-Index: kde-workspace/kdm/backend/util.c
-===================================================================
---- kde-workspace.orig/kdm/backend/util.c	2014-05-07 20:21:11.614072291 +0200
-+++ kde-workspace/kdm/backend/util.c	2014-05-07 20:21:11.614072291 +0200
-@@ -54,6 +54,15 @@
+diff --git a/kdm/backend/util.c b/kdm/backend/util.c
+index e2b31df..eef70b2 100644
+--- a/kdm/backend/util.c
++++ b/kdm/backend/util.c
+@@ -54,6 +54,15 @@ from the copyright holder.
  # include <sys/utsname.h>
  #endif
  
@@ -220,7 +171,7 @@ Index: kde-workspace/kdm/backend/util.c
  void *
  Calloc(size_t nmemb, size_t size)
  {
-@@ -663,6 +672,29 @@
+@@ -663,6 +672,29 @@ hexToBinary(char *out, const char *in)
  
  #undef atox
  
@@ -250,7 +201,7 @@ Index: kde-workspace/kdm/backend/util.c
  /* X -from ip6-addr does not work here, so i don't know whether this is needed.
  #define IP6_MAGIC
  */
-@@ -682,6 +714,10 @@
+@@ -682,6 +714,10 @@ listSessions(int flags, struct display *d, void *ctx,
  #else
      STRUCTUTMP *ut;
  #endif
@@ -261,7 +212,7 @@ Index: kde-workspace/kdm/backend/util.c
  
      for (di = displays; di; di = di->next)
          if (((flags & lstRemote) || (di->displayType & d_location) == dLocal) &&
-@@ -713,11 +749,19 @@
+@@ -713,11 +749,19 @@ listSessions(int flags, struct display *d, void *ctx,
                  if (!(flags & lstRemote))
                      continue;
              } else {
@@ -282,3 +233,60 @@ Index: kde-workspace/kdm/backend/util.c
              }
              if (strNChrCnt(ut->ut_line, sizeof(ut->ut_line), ':'))
                  continue; /* x login */
+diff --git a/kdm/config.def b/kdm/config.def
+index b6584f9..e03bc79 100644
+--- a/kdm/config.def
++++ b/kdm/config.def
+@@ -873,7 +873,7 @@ Description:
+  This option is for operating systems (<acronym>OS</acronym>s) with support
+  for virtual terminals (<acronym>VT</acronym>s), by both &kdm; and the
+  <acronym>OS</acronym>s itself.
+- Currently this applies only to Linux.
++ Currently this applies only to Linux and kFreeBSD.
+  </para><para>
+  When &kdm; switches to console mode, it starts monitoring all
+  <acronym>TTY</acronym> lines listed here (without the leading
+diff --git a/kdm/kfrontend/genkdmconf.c b/kdm/kfrontend/genkdmconf.c
+index ca868a2..e712516 100644
+--- a/kdm/kfrontend/genkdmconf.c
++++ b/kdm/kfrontend/genkdmconf.c
+@@ -1547,7 +1547,8 @@ static void
+ upd_servervts(Entry *ce, Section *cs ATTR_UNUSED)
+ {
+     if (!ce->active) { /* there is only the Global one */
+-#ifdef __linux__ /* XXX actually, sysvinit */
++/* XXX actually, sysvinit */
++#if defined(__linux__) || defined(__FreeBSD_kernel__)
+         getInitTab();
+         ASPrintf((char **)&ce->value, "-%d", maxTTY + 1);
+         ce->active = ce->written = True;
+@@ -1559,14 +1560,19 @@ static void
+ upd_consolettys(Entry *ce, Section *cs ATTR_UNUSED)
+ {
+     if (!ce->active) { /* there is only the Global one */
+-#ifdef __linux__ /* XXX actually, sysvinit */
++/* XXX actually, sysvinit */
++#if defined(__linux__) || defined(__FreeBSD_kernel__)
+         char *buf;
+         int i;
+ 
+         getInitTab();
+         for (i = 0, buf = 0; i < 16; i++)
+             if (TTYmask & (1 << i))
++#if defined(__linux__)
+                 strCat(&buf, ",tty%d", i + 1);
++#elif defined(__FreeBSD_kernel__)
++                strCat(&buf, ",ttyv%x", i);
++#endif
+         if (buf) {
+             ce->value = buf + 1;
+             ce->active = ce->written = True;
+@@ -3198,7 +3204,7 @@ int main(int argc, char **argv)
+             }
+         }
+     }
+-#ifdef __linux__
++#if defined(__linux__) || defined(__FreeBSD_kernel__)
+     if (!stat("/etc/debian_version", &st)) { /* debian */
+         defminuid = "1000";
+         defmaxuid = "29999";

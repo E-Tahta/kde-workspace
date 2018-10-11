@@ -1,8 +1,17 @@
-Index: kde-workspace/kdm/ConfigureChecks.cmake
+From: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Date: Thu, 11 Oct 2018 14:24:18 +0300
+Subject: unlink_testsock
+
 ===================================================================
---- kde-workspace.orig/kdm/ConfigureChecks.cmake	2014-03-02 11:19:54.378463363 +0100
-+++ kde-workspace/kdm/ConfigureChecks.cmake	2014-03-02 16:24:05.240895816 +0100
-@@ -97,6 +97,7 @@
+---
+ kdm/ConfigureChecks.cmake | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/kdm/ConfigureChecks.cmake b/kdm/ConfigureChecks.cmake
+index b61fd90..a50fc34 100644
+--- a/kdm/ConfigureChecks.cmake
++++ b/kdm/ConfigureChecks.cmake
+@@ -97,6 +97,7 @@ check_c_source_runs("
  int main()
  {
      int fd, fd2;
@@ -10,7 +19,7 @@ Index: kde-workspace/kdm/ConfigureChecks.cmake
      struct sockaddr_un sa;
  
      if ((fd = socket(PF_UNIX, SOCK_STREAM, 0)) < 0)
-@@ -108,10 +109,14 @@
+@@ -108,10 +109,14 @@ int main()
          return 2;
      chmod(sa.sun_path, 0);
      setuid(getuid() + 1000);

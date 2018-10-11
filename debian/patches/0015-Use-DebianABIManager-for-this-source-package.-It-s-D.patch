@@ -1,18 +1,18 @@
 From: Modestas Vainius <modax@debian.org>
+Date: Thu, 11 Oct 2018 14:24:17 +0300
 Subject: Use DebianABIManager for this source package. It's Debian-specific.
-Forwarded: not-needed
-Last-Update: 2013-02-15
 
 For more information about DebianABIManager, refer to
 /usr/share/doc/pkg-kde-tools/README.DebianABIManager (pkg-kde-tools (>= 0.12)).
+---
+ CMakeLists.txt | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-
-
-Index: kde-workspace/CMakeLists.txt
-===================================================================
---- kde-workspace.orig/CMakeLists.txt	2013-09-27 09:22:39.945217631 +0000
-+++ kde-workspace/CMakeLists.txt	2013-09-27 09:23:07.988119020 +0000
-@@ -357,4 +357,5 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index df8a1f7..03c3a8b 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -357,4 +357,5 @@ install(EXPORT kdeworkspaceLibraryTargets
          DESTINATION ${_KDE4WorkspaceConfig_INSTALL_DIR}
          FILE KDE4WorkspaceLibraryTargets.cmake )
  

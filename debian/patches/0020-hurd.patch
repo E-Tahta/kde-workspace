@@ -1,0 +1,21 @@
+From: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Date: Thu, 11 Oct 2018 14:24:18 +0300
+Subject: hurd
+
+---
+ kdm/kfrontend/genkdmconf.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/kdm/kfrontend/genkdmconf.c b/kdm/kfrontend/genkdmconf.c
+index e712516..eada3ad 100644
+--- a/kdm/kfrontend/genkdmconf.c
++++ b/kdm/kfrontend/genkdmconf.c
+@@ -48,6 +48,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ #ifdef BSD
+ # ifdef BSD_UTMP
+ #  include <utmp.h>
++# elif defined(__GNU__)
++#  include <paths.h>
+ # endif
+ # ifndef _PATH_UTMP
+ #  if defined(__FreeBSD_version) && __FreeBSD_version >= 900007

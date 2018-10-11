@@ -1,8 +1,17 @@
-Index: kde-workspace/startkde.cmake
+From: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Date: Thu, 11 Oct 2018 14:24:18 +0300
+Subject: kubuntu_no_krandr
+
 ===================================================================
---- kde-workspace.orig/startkde.cmake	2014-02-14 11:53:21.926042620 +0100
-+++ kde-workspace/startkde.cmake	2014-02-14 11:53:21.922042540 +0100
-@@ -70,12 +70,6 @@
+---
+ startkde.cmake | 9 ++-------
+ 1 file changed, 2 insertions(+), 7 deletions(-)
+
+diff --git a/startkde.cmake b/startkde.cmake
+index 9b832a7..ae3007f 100644
+--- a/startkde.cmake
++++ b/startkde.cmake
+@@ -70,12 +70,6 @@ kcminputrc Mouse cursorTheme 'Oxygen_White'
  kcminputrc Mouse cursorSize ''
  ksplashrc KSplash Theme Default
  ksplashrc KSplash Engine KSplashX
@@ -15,7 +24,7 @@ Index: kde-workspace/startkde.cmake
  kcmfonts General forceFontDPI 0
  kdeglobals Locale Language '' # trigger requesting languages from KLocale
  EOF
-@@ -105,7 +99,8 @@
+@@ -105,7 +99,8 @@ if test -n "$kcminputrc_mouse_cursortheme" -o -n "$kcminputrc_mouse_cursorsize"
      fi
  fi
  

@@ -1,10 +1,19 @@
+From: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Date: Thu, 11 Oct 2018 14:24:17 +0300
+Subject: genkdm_make
+
 As we use DEB_CONFIG_INSTALL_DIR ?= /usr/share/kde4/config
 and we want kdm configuration files in /etc/kde4/kdm,
 Let's hardcode it.
+---
+ kdm/kfrontend/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/kdm/kfrontend/CMakeLists.txt b/kdm/kfrontend/CMakeLists.txt
+index b505bdc..b433cf8 100644
 --- a/kdm/kfrontend/CMakeLists.txt
 +++ b/kdm/kfrontend/CMakeLists.txt
-@@ -112,5 +112,5 @@ install(TARGETS kdmctl ${INSTALL_TARGETS
+@@ -112,5 +112,5 @@ install(TARGETS kdmctl ${INSTALL_TARGETS_DEFAULT_ARGS})
  
  # use 'GENKDMCONF_FLAGS=... make install' to add flags to the config generation (try genkdmconf -h)
  install(CODE "

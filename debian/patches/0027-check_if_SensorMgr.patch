@@ -1,8 +1,17 @@
-Index: kde-workspace/libs/ksysguard/ksgrd/SensorAgent.cpp
+From: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Date: Thu, 11 Oct 2018 14:24:18 +0300
+Subject: check_if_SensorMgr
+
 ===================================================================
---- kde-workspace.orig/libs/ksysguard/ksgrd/SensorAgent.cpp	2014-09-21 16:12:31.902565747 +0200
-+++ kde-workspace/libs/ksysguard/ksgrd/SensorAgent.cpp	2014-09-21 16:42:38.510595463 +0200
-@@ -109,9 +109,10 @@
+---
+ libs/ksysguard/ksgrd/SensorAgent.cpp | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/libs/ksysguard/ksgrd/SensorAgent.cpp b/libs/ksysguard/ksgrd/SensorAgent.cpp
+index 69b978a..583c208 100644
+--- a/libs/ksysguard/ksgrd/SensorAgent.cpp
++++ b/libs/ksysguard/ksgrd/SensorAgent.cpp
+@@ -109,9 +109,10 @@ void SensorAgent::processAnswer( const char *buf, int buflen )
            else {
              /* We just received the end of an error message, so we
               * can display it. */

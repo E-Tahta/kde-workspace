@@ -1,8 +1,13 @@
-Description: Provide a Xreset hook using a common framework.
-Forwarded: not-needed
-Bug-Debian: http://bugs.debian.org/571609
-Author: Fathi Boudra <fabo@debian.org>
+From: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Date: Thu, 11 Oct 2018 14:24:17 +0300
+Subject: kdm_xreset_hook_framework
 
+---
+ kdm/kfrontend/genkdmconf.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/kdm/kfrontend/genkdmconf.c b/kdm/kfrontend/genkdmconf.c
+index a1ebb35..ca868a2 100644
 --- a/kdm/kfrontend/genkdmconf.c
 +++ b/kdm/kfrontend/genkdmconf.c
 @@ -701,7 +701,12 @@ static const char def_reset[] =

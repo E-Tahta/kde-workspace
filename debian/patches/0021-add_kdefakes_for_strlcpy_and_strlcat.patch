@@ -1,11 +1,22 @@
+From: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Date: Thu, 11 Oct 2018 14:24:18 +0300
+Subject: add_kdefakes_for_strlcpy_and_strlcat
+
 commit 38faa3a6208b885873a951303d46dbb5f7f56c5f
 Author: Maximiliano Curia <maxy@debian.org>
 Date:   Mon Jun 17 14:32:43 2013 +0200
 
     Add kdefakes for strlcpy and strlcat
+---
+ kcheckpass/checkpass_osfc2passwd.c         | 2 ++
+ ksysguard/ksysguardd/FreeBSD/ProcessList.c | 2 ++
+ ksysguard/ksysguardd/FreeBSD/diskstat.c    | 2 ++
+ ksysguard/ksysguardd/FreeBSD/logfile.c     | 2 ++
+ ksysguard/ksysguardd/FreeBSD/netdev.c      | 2 ++
+ 5 files changed, 10 insertions(+)
 
 diff --git a/kcheckpass/checkpass_osfc2passwd.c b/kcheckpass/checkpass_osfc2passwd.c
-index 9a074f9..8fc9aea 100644
+index d181233..1878c94 100644
 --- a/kcheckpass/checkpass_osfc2passwd.c
 +++ b/kcheckpass/checkpass_osfc2passwd.c
 @@ -30,6 +30,8 @@ static int osf1c2_getprpwent(char *p, char *n, int len);

@@ -1,10 +1,16 @@
 From: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Date: Thu, 11 Oct 2018 14:24:17 +0300
 Subject: Use dejavu as default font
-Forwarded: not-needed
-Last-Update: 2013-02-15
+
+---
+ kcontrol/fonts/fonts.cpp | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/kcontrol/fonts/fonts.cpp b/kcontrol/fonts/fonts.cpp
+index 67eccd4..f27c7e9 100644
 --- a/kcontrol/fonts/fonts.cpp
 +++ b/kcontrol/fonts/fonts.cpp
-@@ -525,13 +525,13 @@ KFonts::KFonts(QWidget *parent, const QV
+@@ -525,13 +525,13 @@ KFonts::KFonts(QWidget *parent, const QVariantList &args)
    QFont f1("Monospace", 16;
    QFont f2("Sans Serif", 16); // toolbar
  #else
