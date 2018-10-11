@@ -26,7 +26,6 @@ usr/share/kde4/apps/desktoptheme/default/widgets/battery-oxygen.svgz
 usr/share/kde4/apps/plasma/plasmoids/battery/
 usr/share/kde4/apps/plasma/plasmoids/lockout/
 usr/share/kde4/apps/plasma/plasmoids/notifier/
-usr/share/kde4/apps/plasma/plasmoids/org.kde.notifications/
 usr/share/kde4/apps/plasma/plasmoids/org.kde.showActivityManager/
 usr/share/kde4/apps/solid/actions/test-predicate-openinwindow.desktop
 usr/share/kde4/services/plasma-animator-default.desktop
@@ -38,7 +37,6 @@ usr/share/kde4/services/plasma-applet-devicenotifier.desktop
 usr/share/kde4/services/plasma-applet-digitalclock.desktop
 usr/share/kde4/services/plasma-applet-icon.desktop
 usr/share/kde4/services/plasma-applet-lockout.desktop
-usr/share/kde4/services/plasma-applet-org.kde.notifications.desktop
 usr/share/kde4/services/plasma-applet-org.kde.showActivityManager.desktop
 usr/share/kde4/services/plasma-applet-panelspacer-internal.desktop
 usr/share/kde4/services/plasma-applet-quicklaunch.desktop
