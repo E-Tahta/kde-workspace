@@ -1,0 +1,44 @@
+From: =?utf-8?q?Yunusemre_=C5=9Eent=C3=BCrk?=
+ <yunusemre.senturk@pardus.org.tr>
+Date: Fri, 12 Oct 2018 13:24:52 +0300
+Subject: Do not add showActivity on every panel!
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>
+---
+ .../addShowActivitiesManagerPlasmoid.js            | 23 ----------------------
+ 1 file changed, 23 deletions(-)
+
+diff --git a/plasma/desktop/shell/configupdates/addShowActivitiesManagerPlasmoid.js b/plasma/desktop/shell/configupdates/addShowActivitiesManagerPlasmoid.js
+index 5be81ca..9ddc7fc 100644
+--- a/plasma/desktop/shell/configupdates/addShowActivitiesManagerPlasmoid.js
++++ b/plasma/desktop/shell/configupdates/addShowActivitiesManagerPlasmoid.js
+@@ -28,26 +28,3 @@ this.findWidgets = function(type)
+     
+     return false;
+ }
+-
+-if (!findWidgets('org.kde.showActivityManager')) {
+-    var panels = panels()
+-    var found = false
+-    for (i in panels) {
+-	found = findWidgetsIn(panels[i], 'launcher')
+-        // Also check for the old style simplelauncher
+-	if (!found) {
+-		found = findWidgetsIn(panels[i], 'simplelauncher')
+-	}
+-
+-	if (found) {
+-	  var showWidget = panels[i].addWidget("org.kde.showActivityManager")
+-	  showWidget.index = found.index + 1;
+-	  break;
+-	}
+-    }
+-    
+-    if (!found && panels.length > 0) {
+-      var showWidget = panels[i].addWidget("org.kde.showActivityManager")
+-      showWidget.index = 0;
+-    }
+-}
