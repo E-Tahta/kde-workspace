@@ -1,3 +1,9 @@
+kde-workspace (4:4.11.13-3pardus5) unstable; urgency=medium
+
+  * Add patches
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Tue, 23 Oct 2018 16:27:54 +0300
+
 kde-workspace (4:4.11.13-3pardus4) unstable; urgency=medium
 
   * Add patches
