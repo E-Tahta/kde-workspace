@@ -1,0 +1,28 @@
+From: =?utf-8?q?Yunusemre_=C5=9Eent=C3=BCrk?=
+ <yunusemre.senturk@pardus.org.tr>
+Date: Tue, 23 Oct 2018 16:26:57 +0300
+Subject: Make default activity folderview
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>
+---
+ plasma/desktop/shell/data/layouts/00-defaultLayout.js | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/plasma/desktop/shell/data/layouts/00-defaultLayout.js b/plasma/desktop/shell/data/layouts/00-defaultLayout.js
+index 0920005..23793b5 100644
+--- a/plasma/desktop/shell/data/layouts/00-defaultLayout.js
++++ b/plasma/desktop/shell/data/layouts/00-defaultLayout.js
+@@ -1,8 +1,8 @@
+ loadTemplate("org.kde.plasma-desktop.defaultPanel")
+ 
+ for (var i = 0; i < screenCount; ++i) {
+-    var desktop = new Activity
+-    desktop.name = i18n("Desktop")
++    var desktop = new Activity("folderview")
++    desktop.name = i18n("Etap Ayar")
+     desktop.screen = i
+     desktop.wallpaperPlugin = 'image'
+     desktop.wallpaperMode = 'SingleImage'

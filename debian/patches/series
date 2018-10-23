@@ -30,3 +30,4 @@
 0030-upstream_validate_timezone_name_before_setting.patch
 0031-Change-default-panel.patch
 0032-Do-not-add-showActivity-on-every-panel.patch
+0033-Make-default-activity-folderview.patch
