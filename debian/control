@@ -205,7 +205,7 @@ Description: transitional package for kde-workspace-bin
 
 Package: kde-workspace-data
 Architecture: all
-Depends: kde-base-artwork, oxygencursors, ${misc:Depends}, ${perl:Depends}
+Depends: kde-base-artwork, ${misc:Depends}, ${perl:Depends}
 Replaces: kde-icons-mono (<< 4:4.6.80),
           kdebase-runtime-data (<< 4:4.5),
           kdebase-workspace-data (<< 4:4.7.2),
