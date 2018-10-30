@@ -1,3 +1,9 @@
+kde-workspace (4:4.11.13-3pardus6) stable; urgency=medium
+
+  * Remove oxygencursors from dependency
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Tue, 30 Oct 2018 13:49:34 +0300
+
 kde-workspace (4:4.11.13-3pardus5) unstable; urgency=medium
 
   * Add patches
